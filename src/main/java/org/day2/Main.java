@@ -3,7 +3,6 @@ package org.day2;
 import org.common.Toolbox;
 
 import java.util.Arrays;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
 
 public class Main {
