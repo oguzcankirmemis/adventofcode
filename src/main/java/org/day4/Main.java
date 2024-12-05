@@ -14,7 +14,7 @@ public class Main {
     }
 
     private static char[][] parseInput(final String input) {
-        return Arrays.stream(input.split("\n")).map(String::toCharArray).toArray(char[][]::new);
+        return Arrays.stream(input.split(System.lineSeparator())).map(String::toCharArray).toArray(char[][]::new);
     }
 
     private static boolean readString(

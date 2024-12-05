@@ -14,7 +14,7 @@ public class Main {
     }
 
     private static int[][] parseInput(final String input) {
-        return Arrays.stream(input.split("\n")).map(line ->
+        return Arrays.stream(input.split(System.lineSeparator())).map(line ->
                 Arrays.stream(Main.inputPattern.split(line)).map(Integer::valueOf).mapToInt(v -> v).toArray()
         ).toArray(int[][]::new);
     }

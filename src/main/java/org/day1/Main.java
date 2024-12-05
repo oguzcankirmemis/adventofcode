@@ -17,7 +17,7 @@ public class Main {
 
     private static Long[][] parseInput(final String input) {
         return Arrays.stream(
-                input.split("\n")).map(line ->
+                input.split(System.lineSeparator())).map(line ->
                         Arrays.stream(
                                 Main.inputPattern.split(line)
                         ).map(Long::valueOf).toArray(Long[]::new)
