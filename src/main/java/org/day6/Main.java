@@ -53,7 +53,11 @@ public class Main {
         while (Main.isInbounds(map, guard) && !visited.contains(guard)) {
             visited.add(guard);
             marked.add(new Position(guard.x(), guard.y()));
-            DirPosition next = new DirPosition(guard.x() + dirs[guard.dir()].x(), guard.y() + dirs[guard.dir()].y(), guard.dir());
+            DirPosition next = new DirPosition(
+                    guard.x() + dirs[guard.dir()].x(),
+                    guard.y() + dirs[guard.dir()].y(),
+                    guard.dir()
+            );
             while (Main.isInbounds(map, next) && Main.OBSTACLE == map[next.y()][next.x()]) {
                 final int dir = (next.dir() + 1) % dirs.length;
                 next = new DirPosition(guard.x() + dirs[dir].x(), guard.y() + dirs[dir].y(), dir);
