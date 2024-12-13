@@ -28,7 +28,8 @@ public class Main {
         .toArray(Equation[]::new);
   }
 
-  private static boolean isPossible1(final Equation equation, final long accumulated, final int current) {
+  private static boolean isPossible1(final Equation equation, final long accumulated,
+      final int current) {
     final long[] operands = equation.operands();
     if (current >= operands.length) {
       return equation.target() == accumulated;
@@ -40,7 +41,8 @@ public class Main {
         Main.isPossible1(equation, accumulated * operands[current], current + 1);
   }
 
-  private static boolean isPossible2(final Equation equation, final long accumulated, final int current) {
+  private static boolean isPossible2(final Equation equation, final long accumulated,
+      final int current) {
     final long[] operands = equation.operands();
     if (current >= operands.length) {
       return equation.target() == accumulated;
@@ -50,7 +52,8 @@ public class Main {
     }
     return Main.isPossible2(equation, accumulated + operands[current], current + 1) ||
         Main.isPossible2(equation, accumulated * operands[current], current + 1) ||
-        Main.isPossible2(equation, Long.parseLong(Long.toString(accumulated) + Long.toString(operands[current])),
+        Main.isPossible2(equation,
+            Long.parseLong(Long.toString(accumulated) + Long.toString(operands[current])),
             current + 1);
   }
 

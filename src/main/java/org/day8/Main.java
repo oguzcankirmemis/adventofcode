@@ -110,7 +110,8 @@ public class Main {
     }
 
     private boolean isInbounds(final char[][] map) {
-      return 0 <= this.y() && this.y < map.length && 0 <= this.x() && this.x() < map[this.y()].length;
+      return 0 <= this.y() && this.y < map.length && 0 <= this.x()
+          && this.x() < map[this.y()].length;
     }
   }
 }

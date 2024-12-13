@@ -42,7 +42,8 @@ public class Main {
     return Arrays.stream(input.split(System.lineSeparator() + System.lineSeparator()))
         .map(machine -> {
           final String[] parts = machine.split(System.lineSeparator());
-          return new ClawMachine(parseButton(parts[0]), parseButton(parts[1]), parsePrize(parts[2]));
+          return new ClawMachine(parseButton(parts[0]), parseButton(parts[1]),
+              parsePrize(parts[2]));
         })
         .toArray(ClawMachine[]::new);
   }

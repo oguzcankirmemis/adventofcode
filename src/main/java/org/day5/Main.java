@@ -60,7 +60,8 @@ public class Main {
     return 0;
   }
 
-  private static int sumValidMiddlePages(final Map<Integer, Set<Integer>> rules, final Integer[][] updates) {
+  private static int sumValidMiddlePages(final Map<Integer, Set<Integer>> rules,
+      final Integer[][] updates) {
     return Arrays.stream(updates)
         .reduce(
             0,
@@ -69,7 +70,8 @@ public class Main {
         );
   }
 
-  private static void fixFirstInconsistency(final Map<Integer, Set<Integer>> rules, final Integer[] update) {
+  private static void fixFirstInconsistency(final Map<Integer, Set<Integer>> rules,
+      final Integer[] update) {
     final Set<Integer> empty = new HashSet<Integer>();
     for (int i = 0; i < update.length; i++) {
       for (int j = i - 1; 0 <= j; j--) {
@@ -83,14 +85,16 @@ public class Main {
     }
   }
 
-  private static Integer[] fixUpdate(final Map<Integer, Set<Integer>> rules, final Integer[] update) {
+  private static Integer[] fixUpdate(final Map<Integer, Set<Integer>> rules,
+      final Integer[] update) {
     while (!isValidUpdate(rules, update)) {
       Main.fixFirstInconsistency(rules, update);
     }
     return update;
   }
 
-  private static int sumInvalidMiddlePages(final Map<Integer, Set<Integer>> rules, final Integer[][] updates) {
+  private static int sumInvalidMiddlePages(final Map<Integer, Set<Integer>> rules,
+      final Integer[][] updates) {
     return Arrays.stream(updates)
         .filter(update -> !Main.isValidUpdate(rules, update))
         .map(update -> Main.fixUpdate(rules, update))

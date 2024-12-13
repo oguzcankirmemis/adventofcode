@@ -70,7 +70,8 @@ public class Parser {
 
   private Optional<Integer> parseNumber() {
     final StringBuilder num = new StringBuilder(3);
-    while (this.pos < this.input.length() && 3 > num.length() && Character.isDigit(this.input.charAt(this.pos))) {
+    while (this.pos < this.input.length() && 3 > num.length() && Character.isDigit(
+        this.input.charAt(this.pos))) {
       num.append(this.input.charAt(this.pos));
       this.pos++;
     }
