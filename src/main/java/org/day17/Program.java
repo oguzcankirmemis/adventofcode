@@ -31,6 +31,27 @@ public class Program {
     this.output = new ArrayList<>();
   }
 
+  public String getInstructionsString() {
+    final StringBuilder sb = new StringBuilder();
+    for (int instruction : instructions) {
+      sb.append(instruction)
+          .append(",");
+    }
+    sb.deleteCharAt(sb.length() - 1);
+    return sb.toString();
+  }
+
+  public int getInstructionsLength() {
+    return instructions.length;
+  }
+
+  public int getInstruction(int index) {
+    if (index < 0 || index >= instructions.length) {
+      return -1;
+    }
+    return instructions[index];
+  }
+
   private long getComboOperand(int operand) {
     return switch (operand) {
       case 6 -> c;
@@ -82,6 +103,8 @@ public class Program {
   }
 
   public String execute() {
+    ip = 0;
+    output.clear();
     while (0 <= ip && ip + 1 < instructions.length) {
       final Instruction i = new Instruction(instructions[ip], instructions[ip + 1]);
       executeInstruction(i);
