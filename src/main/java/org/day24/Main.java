@@ -64,8 +64,7 @@ public class Main {
         .reduce("", (curr, acc) -> curr + "," + acc)
         .substring(1);
   }
-
-
+  
   public static void main(final String[] args) {
     final String input = Toolbox.getInput(inputFile);
     final Circuit circuit = parseInput(input);
