@@ -11,12 +11,24 @@ public class Main {
     super();
   }
 
-  private static String[] parseInput(final String input) {
-    return Arrays.stream(input.split(System.lineSeparator())).toArray(String[]::new);
+  private static Locksmith parseInput(final String input) {
+    final Locksmith locksmith = new Locksmith();
+    Arrays.stream(input.split(System.lineSeparator() + System.lineSeparator()))
+        .forEach(s -> {
+          if (s.charAt(0) == '#') {
+            locksmith.addLock(Lock.parseLock(s));
+          }
+          if (s.charAt(0) == '.') {
+            locksmith.addKey(Key.parseKey(s));
+          }
+        });
+    return locksmith;
   }
 
   public static void main(final String[] args) {
     final String input = Toolbox.getInput(inputFile);
-    System.out.println(input);
+    final Locksmith locksmith = parseInput(input);
+    final int result1 = locksmith.combinations();
+    System.out.println("Part 1: " + result1);
   }
 }
