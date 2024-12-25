@@ -4,5 +4,5 @@
 
 - Solved in Java (JDK version 23)
 - Built with Gradle
-- can be opened with Intellij IDEA
+- Can be opened with Intellij IDEA
 
