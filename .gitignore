@@ -5,6 +5,10 @@ build/
 !**/src/test/**/build/
 **/src/main/resources/input_day*.txt
 
+### zig ###
+zig-out/
+inputs/
+
 ### IntelliJ IDEA ###
 ./.idea
 .idea/modules.xml
