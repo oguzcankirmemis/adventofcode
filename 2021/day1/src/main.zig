@@ -1,9 +1,11 @@
 const std = @import("std");
+const config = @import("config");
 
 const MAX_FILE_SIZE: usize = 1024 * 1024;
 
 var gpa = std.heap.GeneralPurposeAllocator(.{}){};
 const allocator = gpa.allocator();
+const input_path = config.input_path;
 
 fn parse(input: []u8) !std.ArrayList(i64) {
     var ret = std.ArrayList(i64).init(allocator);
@@ -43,7 +45,7 @@ fn part2(numbers: std.ArrayList(i64)) u64 {
 
 pub fn main() !void {
     const stdout = std.io.getStdOut();
-    const file = try std.fs.cwd().openFile("day1/inputs/real.txt", .{});
+    const file = try std.fs.cwd().openFile(input_path, .{});
     const content = try file.readToEndAlloc(allocator, MAX_FILE_SIZE);
     const numbers = try parse(content);
     defer numbers.deinit();

@@ -6,6 +6,7 @@ build/
 **/src/main/resources/input_day*.txt
 
 ### zig ###
+.zig-cache/
 zig-out/
 inputs/
 
