@@ -11,10 +11,12 @@ pub fn build(b: *std.Build) !void {
     const default_input = try std.fmt.allocPrint(allocator, "day{d}/inputs/example.txt", .{day});
     defer allocator.free(default_input);
     const input_path = b.option([]const u8, "input", "Input path") orelse default_input;
+    const optimize = b.standardOptimizeOption(.{});
     const exe = b.addExecutable(.{
         .name = name,
         .root_source_file = b.path(root),
         .target = b.graph.host,
+        .optimize = optimize,
     });
     const options = b.addOptions();
     options.addOption([]const u8, "input_path", input_path);
