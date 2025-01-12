@@ -53,6 +53,7 @@ pub fn main() !void {
     const stdout = std.io.getStdOut();
     const file = try std.fs.cwd().openFile(input_path, .{});
     const content = try file.readToEndAlloc(allocator, MAX_FILE_SIZE);
+    defer allocator.free(content);
     const dp_table = table();
     var lanternfish_list = try parse(content);
     defer lanternfish_list.deinit();

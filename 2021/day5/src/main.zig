@@ -125,6 +125,7 @@ pub fn main() !void {
     const stdout = std.io.getStdOut();
     const file = try std.fs.cwd().openFile(input_path, .{});
     const content = try file.readToEndAlloc(allocator, MAX_FILE_SIZE);
+    defer allocator.free(content);
     const lines = try parse(content);
     defer lines.deinit();
     const result1 = try part1(lines);
