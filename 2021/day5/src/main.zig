@@ -12,6 +12,18 @@ const input_path = config.input_path;
 const Vec2 = struct {
     x: i64,
     y: i64,
+
+    const Vec2KeyContext = struct {
+        pub fn hash(_: Vec2KeyContext, key: Vec2) u64 {
+            const p1: i64 = 73856093;
+            const p2: i64 = 19349663;
+            return @intCast((key.x * p1) ^ (key.y * p2));
+        }
+
+        pub fn eql(_: Vec2KeyContext, a: Vec2, b: Vec2) bool {
+            return a.x == b.x and a.y == b.y;
+        }
+    };
 };
 
 const Line = struct {
@@ -48,20 +60,10 @@ fn parse(input: []const u8) !std.ArrayList(Line) {
     return lines;
 }
 
-fn hash(x: i64, y: i64) ![]const u8 {
-    return try std.fmt.allocPrint(allocator, "{d}#{d}", .{ x, y });
-}
-
 fn part1(lines: std.ArrayList(Line)) !u64 {
     var count: u64 = 0;
-    var map = std.StringHashMap(u64).init(allocator);
-    defer {
-        var iter = map.keyIterator();
-        while (iter.next()) |key| {
-            allocator.free(key.*);
-        }
-        map.deinit();
-    }
+    var map = std.HashMap(Vec2, u64, Vec2.Vec2KeyContext, std.hash_map.default_max_load_percentage).init(allocator);
+    defer map.deinit();
     for (lines.items) |line| {
         if (line.start.x != line.end.x and line.start.y != line.end.y) {
             continue;
@@ -76,11 +78,9 @@ fn part1(lines: std.ArrayList(Line)) !u64 {
             x += dx;
             y += dy;
         }) {
-            const key = try hash(x, y);
-            const entry = try map.getOrPut(key);
+            const entry = try map.getOrPut(.{ .x = x, .y = y });
             if (entry.found_existing) {
                 entry.value_ptr.* += 1;
-                defer allocator.free(key);
             } else {
                 entry.value_ptr.* = 1;
             }
@@ -94,14 +94,8 @@ fn part1(lines: std.ArrayList(Line)) !u64 {
 
 fn part2(lines: std.ArrayList(Line)) !u64 {
     var count: u64 = 0;
-    var map = std.StringHashMap(u64).init(allocator);
-    defer {
-        var iter = map.keyIterator();
-        while (iter.next()) |key| {
-            allocator.free(key.*);
-        }
-        map.deinit();
-    }
+    var map = std.HashMap(Vec2, u64, Vec2.Vec2KeyContext, std.hash_map.default_max_load_percentage).init(allocator);
+    defer map.deinit();
     for (lines.items) |line| {
         const dx = std.math.sign(line.end.x - line.start.x);
         const dy = std.math.sign(line.end.y - line.start.y);
@@ -113,11 +107,9 @@ fn part2(lines: std.ArrayList(Line)) !u64 {
             x += dx;
             y += dy;
         }) {
-            const key = try hash(x, y);
-            const entry = try map.getOrPut(key);
+            const entry = try map.getOrPut(.{ .x = x, .y = y });
             if (entry.found_existing) {
                 entry.value_ptr.* += 1;
-                defer allocator.free(key);
             } else {
                 entry.value_ptr.* = 1;
             }
