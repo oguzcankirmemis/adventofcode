@@ -1,3 +1,5 @@
+const std = @import("std");
+
 pub const Vec2 = struct {
     x: i64,
     y: i64,
@@ -66,5 +68,43 @@ pub const Index2D = struct {
             i += 1;
         }
         return buffer[0..i];
+    }
+};
+
+pub const Graph = struct {
+    adj: std.StringHashMap(std.ArrayList([]const u8)),
+    allocator: std.mem.Allocator,
+    empty: [0][]const u8,
+
+    pub fn init(allocator: std.mem.Allocator) Graph {
+        const self = Graph{
+            .adj = std.StringHashMap(std.ArrayList([]const u8)).init(allocator),
+            .allocator = allocator,
+            .empty = [0][]const u8{},
+        };
+        return self;
+    }
+
+    pub fn neighbours(self: Graph, node: []const u8) [][]const u8 {
+        if (self.adj.get(node)) |list| {
+            return list.items;
+        }
+        return &self.empty;
+    }
+
+    pub fn addEdge(self: *Graph, from: []const u8, to: []const u8) !void {
+        var list = try self.adj.getOrPut(from);
+        if (!list.found_existing) {
+            list.value_ptr.* = std.ArrayList([]const u8).init(self.allocator);
+        }
+        try list.value_ptr.append(to);
+    }
+
+    pub fn deinit(self: *Graph) void {
+        var iterator = self.adj.valueIterator();
+        while (iterator.next()) |list| {
+            list.deinit();
+        }
+        self.adj.deinit();
     }
 };
