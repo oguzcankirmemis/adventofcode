@@ -5,6 +5,96 @@ pub const Vec2 = struct {
     y: i64,
 };
 
+pub const Vec3 = struct {
+    x: i64,
+    y: i64,
+    z: i64,
+
+    pub fn turnAroundX(self: Vec3) Vec3 {
+        return Vec3{ .x = self.x, .y = -self.z, .z = self.y };
+    }
+
+    pub fn turnAroundY(self: Vec3) Vec3 {
+        return Vec3{ .x = -self.z, .y = self.y, .z = self.x };
+    }
+
+    pub fn turnAroundZ(self: Vec3) Vec3 {
+        return Vec3{ .x = -self.y, .y = self.x, .z = self.z };
+    }
+
+    fn topPermutations(self: Vec3) [6]Vec3 {
+        return [6]Vec3{
+            self,
+            self.turnAroundX(),
+            self.turnAroundX().turnAroundX(),
+            self.turnAroundX().turnAroundX().turnAroundX(),
+            self.turnAroundY(),
+            self.turnAroundY().turnAroundY().turnAroundY(),
+        };
+    }
+
+    pub fn num_orientations() u64 {
+        return 24;
+    }
+
+    pub fn orientations(self: Vec3) [24]Vec3 {
+        var ret: [24]Vec3 = undefined;
+        const tops = self.topPermutations();
+        for (0..6) |i| {
+            var curr = tops[i];
+            for (0..4) |j| {
+                ret[4 * i + j] = curr;
+                curr = curr.turnAroundZ();
+            }
+        }
+        return ret;
+    }
+
+    pub fn add(self: Vec3, other: Vec3) Vec3 {
+        return Vec3{
+            .x = self.x + other.x,
+            .y = self.y + other.y,
+            .z = self.z + other.z,
+        };
+    }
+
+    pub fn substract(self: Vec3, other: Vec3) Vec3 {
+        return Vec3{
+            .x = self.x - other.x,
+            .y = self.y - other.y,
+            .z = self.z - other.z,
+        };
+    }
+
+    pub fn eql(self: Vec3, other: Vec3) bool {
+        return self.x == other.x and self.y == other.y and self.z == other.z;
+    }
+
+    pub fn manhattan_distance(self: Vec3, other: Vec3) u64 {
+        var x_dist = self.x - other.x;
+        x_dist = std.math.sign(x_dist) * x_dist;
+        var y_dist = self.y - other.y;
+        y_dist = std.math.sign(y_dist) * y_dist;
+        var z_dist = self.z - other.z;
+        z_dist = std.math.sign(z_dist) * z_dist;
+        return @intCast(x_dist + y_dist + z_dist);
+    }
+
+    pub const Vec3KeyContext = struct {
+        pub fn eql(_: Vec3KeyContext, a: Vec3, b: Vec3) bool {
+            return a.eql(b);
+        }
+
+        pub fn hash(_: Vec3KeyContext, key: Vec3) u64 {
+            const p1 = 7727;
+            const p2 = 7741;
+            const p3 = 7753;
+            const m = 7757;
+            return @intCast(@mod((key.x * p1 + key.y * p2 + key.z * p3), m));
+        }
+    };
+};
+
 pub const Index2D = struct {
     col: usize,
     row: usize,
