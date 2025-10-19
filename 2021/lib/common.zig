@@ -3,6 +3,24 @@ const std = @import("std");
 pub const Vec2 = struct {
     x: i64,
     y: i64,
+
+    pub fn eql(self: Vec2, other: Vec2) bool {
+        return self.x == other.x and
+            self.y == other.y;
+    }
+
+    pub const Vec2KeyContext = struct {
+        pub fn eql(_: Vec2KeyContext, a: Vec2, b: Vec2) bool {
+            return a.eql(b);
+        }
+
+        pub fn hash(_: Vec2KeyContext, key: Vec2) u64 {
+            const p1 = 7727;
+            const p2 = 7741;
+            const m = 7757;
+            return @intCast(@mod((key.x * p1 + key.y * p2), m));
+        }
+    };
 };
 
 pub const Vec3 = struct {
