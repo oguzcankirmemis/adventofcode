@@ -1,7 +1,6 @@
 const std = @import("std");
 const config = @import("config");
 const builtin = @import("builtin");
-const common = @import("common");
 
 const MAX_FILE_SIZE = 1024 * 1024;
 
