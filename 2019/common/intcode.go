@@ -72,6 +72,12 @@ func (computer *Computer) GetLastOutput() int {
 	return computer.outputs[len(computer.outputs)-1]
 }
 
+func (computer *Computer) PopLastOutput() int {
+	ret := computer.outputs[len(computer.outputs)-1]
+	computer.outputs = computer.outputs[:len(computer.outputs)-1]
+	return ret
+}
+
 func (computer *Computer) IsHalted() bool {
 	return computer.halted
 }
