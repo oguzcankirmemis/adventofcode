@@ -78,6 +78,14 @@ func (computer *Computer) PopLastOutput() int {
 	return ret
 }
 
+func (computer *Computer) GetOutput() []int {
+	return computer.outputs
+}
+
+func (computer *Computer) ClearOutput() {
+	computer.outputs = computer.outputs[:0]
+}
+
 func (computer *Computer) IsHalted() bool {
 	return computer.halted
 }
