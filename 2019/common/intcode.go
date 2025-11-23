@@ -51,16 +51,20 @@ func ParseIntcodeProgram(content string) Computer {
 }
 
 func CopyIntcodeProgram(computer *Computer) Computer {
-	memory_copy := make([]int, len(computer.memory))
-	copy(memory_copy, computer.memory)
+	memoryCopy := make([]int, len(computer.memory))
+	copy(memoryCopy, computer.memory)
+	inputCopy := make([]int, len(computer.inputs))
+	copy(inputCopy, computer.inputs)
+	outputCopy := make([]int, len(computer.outputs))
+	copy(outputCopy, computer.outputs)
 	return Computer{
-		memory:  memory_copy,
-		inputs:  make([]int, 0),
-		outputs: make([]int, 0),
-		i:       0,
-		ip:      0,
-		rb:      0,
-		halted:  false,
+		memory:  memoryCopy,
+		inputs:  inputCopy,
+		outputs: outputCopy,
+		i:       computer.i,
+		ip:      computer.ip,
+		rb:      computer.rb,
+		halted:  computer.halted,
 	}
 }
 
