@@ -72,6 +72,10 @@ func (computer *Computer) AppendInput(input int) {
 	computer.inputs = append(computer.inputs, input)
 }
 
+func (computer *Computer) AppendInputs(input []int) {
+	computer.inputs = append(computer.inputs, input...)
+}
+
 func (computer *Computer) GetLastOutput() int {
 	return computer.outputs[len(computer.outputs)-1]
 }
