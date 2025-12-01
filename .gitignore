@@ -5,10 +5,13 @@ build/
 !**/src/test/**/build/
 **/src/main/resources/input_day*.txt
 
-### zig ###
+### Zig/Go ###
 .zig-cache/
 zig-out/
 inputs/
+
+### Javascript ###
+input.js
 
 ### IntelliJ IDEA ###
 ./.idea

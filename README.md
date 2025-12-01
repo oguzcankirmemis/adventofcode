@@ -1,5 +1,11 @@
 # Advent of Code Solutions Repository
 
+## 2025
+
+- Solved in Javascript (Node.js Version v24.11)
+- Inputs should be provided as an `input.js` file exporting a single `input` variable
+- A template input can be found at `./2025/template.input.js`
+
 ## 2024
 
 - Solved in Java (JDK version 23)
@@ -14,6 +20,7 @@
 - Use `zig build -h` and `zig build run` for more info
 
 ## 2019
+
 - Solved with Go (1.25.3)
 - Can be opened with VSCode using official Go extension
 - Use `go run .` once you navigate to a day, e.g. `cd day1`
