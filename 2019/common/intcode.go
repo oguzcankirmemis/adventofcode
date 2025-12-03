@@ -76,6 +76,15 @@ func (computer *Computer) AppendInputs(input []int) {
 	computer.inputs = append(computer.inputs, input...)
 }
 
+func (computer *Computer) AppendStringInput(input string) {
+	byteSlice := []byte(input)
+	intSlice := make([]int, len(byteSlice))
+	for i, b := range byteSlice {
+		intSlice[i] = int(b)
+	}
+	computer.inputs = append(computer.inputs, intSlice...)
+}
+
 func (computer *Computer) GetLastOutput() int {
 	return computer.outputs[len(computer.outputs)-1]
 }
