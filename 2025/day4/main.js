@@ -1,4 +1,4 @@
-import { input } from "./input.js"
+import { input } from "./input.js";
 
 const map = input.split("\n").map(x => x.split(""));
 

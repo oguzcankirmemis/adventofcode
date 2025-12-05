@@ -1,4 +1,4 @@
-import { input } from "./input.js"
+import { input } from "./input.js";
 
 const idRanges = input.split(",").map(x => x.split("-").map(y => parseInt(y)));
 
