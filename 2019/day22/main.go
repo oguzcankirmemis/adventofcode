@@ -19,7 +19,6 @@ const (
 type Instruction struct {
 	shuffleType ShuffleType
 	offset      int
-	inverse     int
 }
 
 func parseInstruction(input string) Instruction {
