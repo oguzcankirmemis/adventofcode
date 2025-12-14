@@ -32,26 +32,6 @@ function solvePart1(input) {
     return ret;
 }
 
-function dfs(input, start, end) {
-    let ret = 0;
-    const stack = [start];
-    while (stack.length > 0) {
-        const node = stack.pop();
-        if (node === end) {
-            ret++;
-            continue;
-        }
-        const neighbours = input.get(node);
-        if (!neighbours) {
-            continue;
-        }
-        for (let i = 0; i < neighbours.length; i++) {
-            stack.push(neighbours[i]);
-        }
-    }
-    return ret;
-}
-
 function bfs(input, nodeSet, nodeIdMap, reverseInput, start, end) {
     let dp = new Array(nodeSet.size).fill(null).map(_ => new Map());
     for (const [node1, neighbours] of input) {
