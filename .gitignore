@@ -10,6 +10,9 @@ build/
 zig-out/
 inputs/
 
+### COBOL ###
+*.exe
+
 ### Javascript ###
 input.js
 
