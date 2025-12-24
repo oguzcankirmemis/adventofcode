@@ -2,19 +2,19 @@
 
 ## 2025
 
-- Solved in Javascript (Node.js Version v24.11)
+- Solved with Javascript (Node.js version v24.11)
 - Inputs should be provided as an `input.js` file exporting a single `input` variable
 - A template input can be found at `./2025/template.input.js`
 
 ## 2024
 
-- Solved in Java (JDK version 23)
+- Solved with Java (JDK version 23)
 - Built with Gradle
 - Can be opened with Intellij IDEA
 
 ## 2021
 
-- Solved with Zig (0.14.0 -- Master branch)
+- Solved with Zig (0.14.0)
 - Should be cross-compatible (untested)
 - Can be opened with VSCode using official Zig extension
 - Use `zig build -h` and `zig build run` for more info
@@ -26,3 +26,10 @@
 - Use `go run .` once you navigate to a day, e.g. `cd day1`
 - Inputs usually expected in `inputs` subfolder, e.g. `day1/inputs/example.txt`
 - Exact path needed for an input is usually found in the main function of a day, e.g. the main function in `day1/main.go`
+
+## 2018
+
+- Solved with COBOL (GnuCOBOL 3.2)
+- Can be opened with VSCode using SuperBOL extension
+- Use `cobc -x DAYX.cob` once you navigate to a day, e.g. `cd day1`
+- Exact path needed for an input is usually found in environment division of the corresponding day.
