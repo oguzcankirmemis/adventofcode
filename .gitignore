@@ -12,6 +12,7 @@ inputs/
 
 ### COBOL ###
 *.exe
+*.dll
 _superbol
 
 ### Javascript ###

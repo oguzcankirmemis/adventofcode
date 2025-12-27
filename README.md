@@ -33,3 +33,4 @@
 - Can be opened with VSCode using SuperBOL extension
 - Use `cobc -x DAYX.cob` once you navigate to a day, e.g. `cd day1`
 - Exact path needed for an input is usually found in environment division of the corresponding day.
+- Some days depend on extra cobol programs, e.g. day 8, use `cobc <PROGNAME>.cob` to compile them as shared libraries
