@@ -21,9 +21,9 @@
           01 PART-2-VARS.
              03 PART-2-FOUND PIC A(1) VALUE "N".
              03 PART-2-CURRENT-SUM PIC S9(18) USAGE COMP-3 VALUE 0.
-             03 PART-2-HISTORY-INDEX PIC 9(6) USAGE COMP-3 VALUE 2.
              03 PART-2-HISTORY OCCURS 999999.
-                05 PART-2-SUM PIC S9(18) USAGE COMP-3.
+                05 PART-2-POSITIVE PIC X(1) VALUE "N".
+                05 PART-2-NEGATIVE PIC X(1) VALUE "N".
       * 
        PROCEDURE DIVISION.
        PART-1 SECTION.
@@ -41,8 +41,9 @@
           DISPLAY "PART 1: " PART-1-SUM.
       *    
        PART-2 SECTION.
+           MOVE "Y" TO PART-2-POSITIVE (1).
+       PART-2-10.
            MOVE "N" TO WS-INPUT-FILE-EOF.
-           MOVE 0 TO PART-2-SUM (1).
            OPEN INPUT INPUT-FILE.
              PERFORM UNTIL WS-INPUT-FILE-EOF="Y"
                 READ INPUT-FILE
@@ -51,28 +52,32 @@
                    NOT AT END
                       MOVE INPUT-VARIABLE TO TMP-VAR
                       ADD TMP-VAR TO PART-2-CURRENT-SUM
-                      PERFORM SEARCH-SUM VARYING TMP-IDX FROM 1 BY 1
-                         UNTIL TMP-IDX = PART-2-HISTORY-INDEX
-                      IF PART-2-FOUND = "Y"
-                      THEN
+                      PERFORM SEARCH-SUM
+                      IF PART-2-FOUND = "Y" THEN
                          GO TO PART-2-99
                       END-IF
-                      MOVE PART-2-CURRENT-SUM TO 
-                         PART-2-SUM (PART-2-HISTORY-INDEX)
-                      ADD 1 TO PART-2-HISTORY-INDEX
                 END-READ
              END-PERFORM.
            CLOSE INPUT-FILE.
-           GO TO PART-2.
+           GO TO PART-2-10.
        PART-2-99.
            CLOSE INPUT-FILE.
            DISPLAY "PART 2: " PART-2-CURRENT-SUM.
            STOP RUN.
       *
-      * Lazy for hashset based solution yet
+      * SIMPLE HASHSET WITH HASH FUNCTION: x -> |x| + 1
+      * DOES NOT HANDLE OUT OF BOUNDS.
        SEARCH-SUM SECTION.
-          IF PART-2-SUM (TMP-IDX) = PART-2-CURRENT-SUM
-          THEN
-             MOVE "Y" TO PART-2-FOUND
-          END-IF.
-          EXIT.
+           COMPUTE TMP-VAR = FUNCTION ABS (PART-2-CURRENT-SUM) + 1.
+           IF PART-2-CURRENT-SUM < 0 THEN
+               IF PART-2-NEGATIVE (TMP-VAR) = "Y" THEN
+                   MOVE "Y" TO PART-2-FOUND
+               END-IF
+               MOVE "Y" TO PART-2-NEGATIVE (TMP-VAR)
+           ELSE
+               IF PART-2-POSITIVE (TMP-VAR) = "Y" THEN
+                   MOVE "Y" TO PART-2-FOUND
+               END-IF
+               MOVE "Y" TO PART-2-POSITIVE (TMP-VAR)
+           END-IF.
+           EXIT.
