@@ -35,3 +35,11 @@
 - Exact path needed for an input is usually found in environment division of the corresponding day.
 - Some days depend on extra cobol programs, e.g. day 8, use `cobc <PROGNAME>.cob` to compile them as shared libraries
 - Almost all solutions are COBOL ANSI-85 compliant or easy to convert to, other than day 8, which uses recursive calls.
+
+## 2017
+
+- Solved with Bash and POSIX tools (Minimum: Bash 3.0, subject to change)
+- Simply run the shell script in each day, e.g. `cd day1 && ./day1.sh`
+- Inputs expected in `inputs` subfolder under `input.txt`
+- The solutions are not optimized for speed, rather for readability and convenience
+- Therefore, some simple challenges can easily take more than a minute
