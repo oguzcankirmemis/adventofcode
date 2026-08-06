@@ -58,7 +58,7 @@ while (( ${pc} >= 0 )) && (( ${pc} < ${#instructions[@]} )); do
   simulate
 done
 
-echo "Part 1: ${mul_count} - ${regs[7]}"
+echo "Part 1: ${mul_count}"
 
 for ((i=0; ${i}<8; i++)); do
   regs[${i}]=0
