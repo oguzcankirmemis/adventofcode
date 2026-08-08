@@ -38,8 +38,8 @@
 
 ## 2017
 
-- Solved with Bash and POSIX tools (Minimum: Bash 3.0, subject to change)
+- Solved with Bash and POSIX tools (Bash 3.0)
 - Simply run the shell script in each day, e.g. `cd day1 && ./day1.sh`
 - Inputs expected in `inputs` subfolder under `input.txt`
 - The solutions are not optimized for speed, rather for readability and convenience
-- Therefore, some simple challenges can easily take more than a minute
+- Some simple challenges can easily take more than a minute, if not hours
